@@ -1,0 +1,15 @@
+.loadBtn {
+    display: block;
+    margin: 0 auto;
+    width: 120px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: coral;
+    font-size: 20px;
+    
+    &:hover {
+        scale: 1.05;
+    }
+}
