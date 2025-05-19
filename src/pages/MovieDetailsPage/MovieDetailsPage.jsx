@@ -1,5 +1,5 @@
 // import css from "./MovieDetailsPage.module.css"
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -20,17 +20,13 @@ export default function MovieDetailsPage() {
                 Authorization: `Bearer ${ACCESS_TOKEN}`,
                 },
             });
-            console.log(response.data);
             setDetails(response.data);
         } catch (error) {
             console.error(error);
         }
     };
-
     fetchMovieDetailsPage();
-    }, [movieId]);
-
-    
+    }, [movieId]);    
 
     return (     
         <div>
@@ -48,16 +44,18 @@ export default function MovieDetailsPage() {
                 </div>
             )}
 
-            <p>Additional Information</p>
-            <ul>
-                <li>
-                    <Link to="cast">Cast</Link>
-                </li>
-                <li>
-                    <Link to="reviews">Reviews</Link>
-                </li>
-            </ul>
-            <Outlet />
+            <div>
+                <p>Additional Information</p>
+                <ul>
+                    <li>
+                        <NavLink to="cast">Cast</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="reviews">Reviews</NavLink>
+                    </li>
+                </ul>
+                <Outlet />
+            </div>
         </div>
     )
 }
