@@ -1,4 +1,5 @@
 // import css from "./MovieList.module.css"
+import { Link } from 'react-router-dom';
 
 export default function MovieList({ movies } ) {
     return (
@@ -6,7 +7,7 @@ export default function MovieList({ movies } ) {
             {movies.map((movie) => {
                 return (
                     <li key={movie.id}>
-                        <a href="">{movie.title}</a>
+                        <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
                     </li>
                 )
             })}
