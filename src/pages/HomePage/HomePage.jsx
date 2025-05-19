@@ -1,5 +1,5 @@
 // import css from "./HomePage.module.css"
 
 export default function HomePage() {
-    return 
+    return <h2>Home Page</h2>;
 }
