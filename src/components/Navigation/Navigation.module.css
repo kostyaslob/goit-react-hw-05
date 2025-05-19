@@ -1,17 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  margin-bottom: 16px;
+  border-bottom: 1px solid black;
+}
+
 .nav {
   display: flex;
-  gap: 10px;
 }
 
 .link {
-  color: black;
+  padding: 8px 16px;
+  border-radius: 4px;
   text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
+  color: black;
+  font-weight: 500;
 }
 
 .active {
-  color: salmon;
+  color: white;
+  background-color: salmon;
 }

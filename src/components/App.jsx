@@ -2,8 +2,8 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
 import MoviesPage from "../pages/MoviesPage/MoviesPage";
-// import MovieDetailsPage from "../pages/MovieDetailsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+// import MovieDetailsPage from "../pages/MovieDetailsPage";
 // import MovieCast from "../components/MovieCast/MovieCast";
 // import MovieReviews from "../components/MovieReviews/MovieReviews";
 
