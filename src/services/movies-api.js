@@ -30,3 +30,15 @@ export const fetchMovieCast = async (movieId) => {
     });
     return response.data
 }
+
+export const fetchMoviewsPage = async (query) => {
+    const response = await axios.get("/search/movie", {
+        headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+        params: {
+        query: query,    
+        }
+    });
+    return response.data
+}
