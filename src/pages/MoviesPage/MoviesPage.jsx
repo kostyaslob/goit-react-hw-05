@@ -4,34 +4,37 @@ import { useSearchParams } from "react-router-dom";
 import { RiseLoader } from "react-spinners";
 import MovieList from "../../components/MovieList/MovieList";
 import {fetchMoviewsPage} from "../../services/movies-api.js"
-import { useDebounce } from 'use-debounce';
 
 export default function MoviesPage() {
     const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);    
+    const [searchParams, setSearchParams] = useSearchParams();    
+    const queryParam = searchParams.get("query") ?? "";
+    const [inputValue, setInputValue] = useState(queryParam)
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const query = searchParams.get("query") ?? "";
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    }
 
-    const [debouncedQuery] = useDebounce(query, 300)
+    const handleSearch = () => {
+        const nextParams = new URLSearchParams();
 
-    const changeSearchQuery = (event) => {
-        const newQuery = event.target.value;
-        const nextSearchParams = new URLSearchParams(searchParams);
-
-        if (newQuery !== "") {
-           nextSearchParams.set("query", newQuery); 
-        } else {
-            nextSearchParams.delete("query")
-        }        
-        setSearchParams(nextSearchParams);
+        if (inputValue.trim() !== "") {
+           nextParams.set("query", inputValue.trim()); 
+        }     
+        setSearchParams(nextParams);
     }
 
     useEffect(() => {    
+        if (!queryParam) {
+            setMovies([]);
+            return;
+        }
+
         async function fetchMovies() {
             try {
                 setLoading(true);
-                const data = await fetchMoviewsPage();
+                const data = await fetchMoviewsPage(queryParam);
                     
                 setMovies(data.results || []);
                 } catch (error) {
@@ -42,11 +45,12 @@ export default function MoviesPage() {
                 }
         };
         fetchMovies();
-        }, [debouncedQuery]);
+        }, [queryParam]);
 
     return (
         <div>
-            <input type="text" value={query} onChange={changeSearchQuery}/>
+            <input type="text" value={inputValue} onChange={handleInputChange} />
+            <button onClick={handleSearch}>Search</button>
             {loading && <RiseLoader />}
             {movies.length > 0 && <MovieList movies={movies} />}
         </div>
