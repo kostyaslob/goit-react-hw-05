@@ -22,4 +22,11 @@ export const fetchMovieReviews = async (movieId) => {
     return response.data
 }
 
-export const 
+export const fetchMovieCast = async (movieId) => {
+        const response = await axios.get(`/movie/${movieId}/credits`, {
+            headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+    });
+    return response.data
+}

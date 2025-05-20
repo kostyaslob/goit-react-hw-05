@@ -2,11 +2,8 @@ import css from "./MovieCast.module.css"
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { RiseLoader } from "react-spinners";
-import axios from "axios";
+import { fetchMovieCast } from "../../services/movies-api.js"
 
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
-const ACCESS_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMTlmNjE3MzZkNjAwMmZhMzcyNDFkNTZhMDJhN2JhMCIsIm5iZiI6MTc0NzQxNDM1OC4zNiwic3ViIjoiNjgyNzZkNTZhYTBhMmMxNjI0NGI1YzBlIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.5P9P74K3pPRYuTSR8WUC6p_MiEuSnC_52AZzGPOQHHM";
 
 export default function MovieCast() {
     const { movieId } = useParams();
@@ -14,15 +11,12 @@ export default function MovieCast() {
     const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
-    const fetchMovieCast = async () => {
+    async function fetchCast() {
         try {
-            const response = await axios.get(`/movie/${movieId}/credits`, {
-                headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-                },
-            });
-            setCast(response.data.cast);
+          setLoading(true);
+          const data = await fetchMovieCast(movieId)
+
+            setCast(data.cast);
           } catch (error) {
             console.error(error);
           }
@@ -30,7 +24,7 @@ export default function MovieCast() {
             setLoading(false)
          }
     };
-    fetchMovieCast();
+    fetchCast();
     }, [movieId]);
 
   return (
