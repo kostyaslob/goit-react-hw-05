@@ -18,11 +18,16 @@ export default function MoviesPage() {
 
     const handleSearch = () => {
         const nextParams = new URLSearchParams();
-
         if (inputValue.trim() !== "") {
            nextParams.set("query", inputValue.trim()); 
         }     
         setSearchParams(nextParams);
+    }
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSearch()
+        }
     }
 
     useEffect(() => {    
@@ -49,7 +54,13 @@ export default function MoviesPage() {
 
     return (
         <div>
-            <input type="text" value={inputValue} onChange={handleInputChange} />
+            <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange} 
+                onKeyDown={handleKeyDown}
+                placeholder="Search movies..."
+                />
             <button onClick={handleSearch}>Search</button>
             {loading && <RiseLoader />}
             {movies.length > 0 && <MovieList movies={movies} />}
