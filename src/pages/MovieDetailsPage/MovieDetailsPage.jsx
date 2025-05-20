@@ -24,7 +24,7 @@ export default function MovieDetailsPage() {
 
     return (     
         <div>
-            <Link to={backlinkRef.current}>Go Back</Link>   
+            <Link to={backlinkRef.current ? backlinkRef.current : "/movies"}>Go Back</Link>   
             
             {details && (
                 <div className={css.details}>
