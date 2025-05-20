@@ -13,6 +13,15 @@ export const fetchTrendingMovies = async () => {
     return response.data
 }
 
+export const fetchMovieDetailsPage = async (movieId) => {
+    const response = await axios.get(`/movie/${movieId}?language=en-US`, {
+            headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+    })
+    return response.data
+}
+
 export const fetchMovieReviews = async (movieId) => {
     const response = await axios.get(`/movie/${movieId}/reviews`, {
             headers: {

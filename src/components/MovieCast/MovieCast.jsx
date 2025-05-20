@@ -30,7 +30,7 @@ export default function MovieCast() {
   return (
     
     <div>
-      {loading && <RiseLoader />}
+      {loading && <RiseLoader color="#fa8072"/>}
       <ul className={css.movieList}>
         {cast.map(actor => (
           <li className={css.movieItem} key={actor.id}>

@@ -1,36 +1,30 @@
 import css from "./MovieDetailsPage.module.css"
-import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { NavLink, Link, Outlet, useParams, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from "react";
 
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
-const ACCESS_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMTlmNjE3MzZkNjAwMmZhMzcyNDFkNTZhMDJhN2JhMCIsIm5iZiI6MTc0NzQxNDM1OC4zNiwic3ViIjoiNjgyNzZkNTZhYTBhMmMxNjI0NGI1YzBlIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.5P9P74K3pPRYuTSR8WUC6p_MiEuSnC_52AZzGPOQHHM";
+import {fetchMovieDetailsPage} from "../../services/movies-api.js"
 
 export default function MovieDetailsPage() {
-    const navigate = useNavigate();
+    const location = useLocation();
+    const backlinkRef = useRef(location.state)
     const { movieId } = useParams();
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
-    const fetchMovieDetailsPage = async () => {
+    async function fetchDetails() {
         try {
-            const response = await axios.get(`/movie/${movieId}?language=en-US`, {
-                headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-                },
-            });
-            setDetails(response.data);
+            const data = await fetchMovieDetailsPage(movieId)
+            setDetails(data);
         } catch (error) {
             console.error(error);
         }
     };
-    fetchMovieDetailsPage();
+    fetchDetails();
     }, [movieId]);    
 
     return (     
         <div>
-            <button onClick={() => navigate(-1)}>Go Back</button>   
+            <Link to={backlinkRef.current}>Go Back</Link>   
             
             {details && (
                 <div className={css.details}>

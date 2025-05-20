@@ -27,7 +27,7 @@ export default function HomePage() {
 
     return (
         <div>
-            {loading && <RiseLoader />}
+            {loading && <RiseLoader color="#fa8072" />}
             {movies.length > 0 && <MovieList movies={movies} />}
         </div>
     );

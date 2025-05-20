@@ -33,7 +33,7 @@ export default function MovieReviews() {
 
     return (
       <div>
-        {loading && <RiseLoader />}
+        {loading && <RiseLoader color="#fa8072"/>}
         <ul>
           {reviews.map(review => (
             <li key={review.id}>

@@ -35,7 +35,6 @@ export default function MoviesPage() {
             setMovies([]);
             return;
         }
-
         async function fetchMovies() {
             try {
                 setLoading(true);
@@ -62,7 +61,7 @@ export default function MoviesPage() {
                 placeholder="Search movies..."
                 />
             <button onClick={handleSearch}>Search</button>
-            {loading && <RiseLoader />}
+            {loading && <RiseLoader color="#fa8072"/>}
             {movies.length > 0 && <MovieList movies={movies} />}
         </div>
     )
