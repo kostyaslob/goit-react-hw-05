@@ -1,5 +1,53 @@
 // import css from "./MoviesPage.module.css"
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { RiseLoader } from "react-spinners";
+import MovieList from "../../components/MovieList/MovieList";
+import { useDebounce } from 'use-debounce';
 
 export default function MoviesPage() {
-    return <h2>Movies</h2>;
+    const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get("query") ?? "";
+
+    const [debouncedQuery] = useDebounce(query, 300)
+
+    const changeSearchQuery = (event) => {
+        const newQuery = event.target.value;
+        const nextSearchParams = new URLSearchParams(searchParams);
+
+        if (newQuery !== "") {
+           nextSearchParams.set("query", newQuery); 
+        } else {
+            nextSearchParams.delete("query")
+        }        
+        setSearchParams(nextSearchParams);
+    }
+
+    useEffect(() => {    
+        // async function fetchData() {
+        //     try {
+        //         setLoading(true);
+        //         const data = await fetchTrendingMovies();
+                    
+        //         setMovies(data.results || []);
+        //         } catch (error) {
+        //             console.error(error);
+        //         }
+        //         finally {
+        //             setLoading(false)
+        //         }
+        // };
+        // fetchData();
+        }, [debouncedQuery]);
+
+    return (
+        <div>
+            <input type="text" value={query} onChange={changeSearchQuery}/>
+            {loading && <RiseLoader />}
+            {movies.length > 0 && <MovieList movies={movies} />}
+        </div>
+    )
 }
