@@ -1,4 +1,4 @@
-// import css from "./MovieCast.module.css"
+import css from "./MovieCast.module.css"
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -28,14 +28,21 @@ export default function MovieCast() {
     }, [movieId]);
 
     return (
-    <ul>
+    <ul className={css.movieList}>
       {cast.map(actor => (
-        <li key={actor.id}>
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-            alt={actor.name}
-            width={100}
-          />
+        <li className={css.movieItem} key={actor.id}>
+          {actor.profile_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+              alt={actor.name}
+              width={100}
+              className={css.img}
+            />
+          ) : (
+            <div className={css.noimage}>
+              <span>No image</span>
+            </div>
+          )}
           <h4>{actor.name}</h4>
           <p>Character: {actor.character}</p>
         </li>

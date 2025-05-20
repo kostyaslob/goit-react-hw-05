@@ -1,0 +1,33 @@
+.movieList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+}
+
+.movieItem {
+    width: 150px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #ccc;
+}
+
+.img {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.noimage {
+    width: 150px;
+    height: 225px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 14px;
+    border-radius: 8px;
+    font-style: italic;
+}

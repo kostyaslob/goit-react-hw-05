@@ -1,4 +1,4 @@
-// import css from "./MovieDetailsPage.module.css"
+import css from "./MovieDetailsPage.module.css"
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -33,29 +33,28 @@ export default function MovieDetailsPage() {
             <button onClick={() => navigate(-1)}>Go Back</button>   
             
             {details && (
-                <div>
+                <div className={css.details}>
                     <img src={`https://image.tmdb.org/t/p/w500/${details.backdrop_path}`} alt={details.title}/>
                     <h2>{details.title}</h2>
                     <p>Users score: {details.vote_average} %</p>
                     <h3>Overview</h3>
                     <p>{details.overview}</p>
-                    <h3>Genres</h3>
+                    <h4>Genres</h4>
                     <p>{details.genres?.map(genre => genre.name).join(", ")}</p>
                 </div>
             )}
-
-            <div>
-                <p>Additional Information</p>
-                <ul>
-                    <li>
-                        <NavLink to="cast">Cast</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="reviews">Reviews</NavLink>
-                    </li>
-                </ul>
-                <Outlet />
-            </div>
+                <div className={css.info}>
+                    <h4>Additional Information</h4>
+                    <ul className={css.infoList}>
+                        <li>
+                            <NavLink to="cast">Cast</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="reviews">Reviews</NavLink>
+                        </li>
+                    </ul>
+                    <Outlet />
+                </div>
         </div>
     )
 }
