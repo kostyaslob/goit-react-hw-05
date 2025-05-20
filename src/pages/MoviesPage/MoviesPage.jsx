@@ -1,4 +1,4 @@
-// import css from "./MoviesPage.module.css"
+import css from "./MoviesPage.module.css"
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { RiseLoader } from "react-spinners";
@@ -53,14 +53,17 @@ export default function MoviesPage() {
 
     return (
         <div>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange} 
-                onKeyDown={handleKeyDown}
-                placeholder="Search movies..."
-                />
-            <button onClick={handleSearch}>Search</button>
+            <div className={css.search}>
+                <input
+                    className={css.input}
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Search movies..."
+                    />
+                <button className={css.button} onClick={handleSearch}>Search</button>
+            </div>
             {loading && <RiseLoader color="#fa8072"/>}
             {movies.length > 0 && <MovieList movies={movies} />}
         </div>

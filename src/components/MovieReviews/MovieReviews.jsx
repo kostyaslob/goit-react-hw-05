@@ -1,4 +1,4 @@
-// import css from "./MovieReviews.module.css"
+import css from "./MovieReviews.module.css"
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
@@ -34,10 +34,10 @@ export default function MovieReviews() {
     return (
       <div>
         {loading && <RiseLoader color="#fa8072"/>}
-        <ul>
+        <ul className={css.listReviews}>
           {reviews.map(review => (
-            <li key={review.id}>
-              <h4>Author: {review.author}</h4>
+            <li className={css.linkReviews} key={review.id}>
+              <h4 className={css.title} >Author: {review.author}</h4>
               <p>{review.content}</p>
             </li>
           ))}

@@ -9,7 +9,7 @@
     width: 150px;
     border-radius: 8px;
     text-align: center;
-    background-color: #ccc;
+    background-color: salmon;
 }
 
 .img {
@@ -22,7 +22,7 @@
 .noimage {
     width: 150px;
     height: 225px;
-    background-color: #ccc;
+    background-color: salmon;
     display: flex;
     align-items: center;
     justify-content: center;

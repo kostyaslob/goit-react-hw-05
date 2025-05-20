@@ -24,27 +24,29 @@ export default function MovieDetailsPage() {
 
     return (     
         <div>
-            <Link to={backlinkRef.current ? backlinkRef.current : "/movies"}>Go Back</Link>   
+            <Link className={css.backButton} to={backlinkRef.current ? backlinkRef.current : "/movies"}>Go Back</Link>   
             
             {details && (
                 <div className={css.details}>
-                    <img src={`https://image.tmdb.org/t/p/w500/${details.backdrop_path}`} alt={details.title}/>
-                    <h2>{details.title}</h2>
-                    <p>Users score: {details.vote_average} %</p>
-                    <h3>Overview</h3>
-                    <p>{details.overview}</p>
-                    <h4>Genres</h4>
-                    <p>{details.genres?.map(genre => genre.name).join(", ")}</p>
+                    <img className={css.imageDetails} src={`https://image.tmdb.org/t/p/w500/${details.backdrop_path}`} alt={details.title}/>
+                    <div className={css.movieDetails}>
+                        <h2>{details.title} ({details.release_date?.slice(0, 4)})</h2>
+                        <p>Users score: {details.vote_average} %</p>
+                        <h3>Overview</h3>
+                        <p>{details.overview}</p>
+                        <h4>Genres</h4>
+                        <p>{details.genres?.map(genre => genre.name).join(", ")}</p>
+                    </div>
                 </div>
             )}
                 <div className={css.info}>
                     <h4>Additional Information</h4>
                     <ul className={css.infoList}>
                         <li>
-                            <NavLink to="cast">Cast</NavLink>
+                            <NavLink className={css.linksDetails} to="cast">Cast</NavLink>
                         </li>
                         <li>
-                            <NavLink to="reviews">Reviews</NavLink>
+                            <NavLink className={css.linksDetails} to="reviews">Reviews</NavLink>
                         </li>
                     </ul>
                     <Outlet />

@@ -1,0 +1,22 @@
+.listReviews {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.linkReviews {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid salmon;
+    border-radius: 4px;
+    padding: 15px;
+
+    & h4 {
+        text-align: center;
+    }
+
+    & p {
+        text-align: justify;
+    }
+}
