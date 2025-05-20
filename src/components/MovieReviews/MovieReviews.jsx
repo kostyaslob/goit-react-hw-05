@@ -24,7 +24,7 @@ export default function MovieReviews() {
                 },
             });
             setReviews(response.data.results);
-        } catch (error) {
+          } catch (error) {
             console.error(error);
           }
           finally {

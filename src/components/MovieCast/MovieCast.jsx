@@ -23,7 +23,7 @@ export default function MovieCast() {
                 },
             });
             setCast(response.data.cast);
-        } catch (error) {
+          } catch (error) {
             console.error(error);
           }
           finally {
