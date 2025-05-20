@@ -1,5 +1,6 @@
 // import css from "./HomePage.module.css"
 import { useEffect, useState } from "react";
+import { RiseLoader } from "react-spinners";
 import axios from "axios";
 import MovieList from "../../components/MovieList/MovieList";
 
@@ -34,7 +35,7 @@ export default function HomePage() {
 
     return (
         <div>
-            {loading && <strong>Loading...</strong>}
+            {loading && <RiseLoader />}
             {movies.length > 0 && <MovieList movies={movies} />}
         </div>
     );

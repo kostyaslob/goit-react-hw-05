@@ -2,6 +2,7 @@
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { RiseLoader } from "react-spinners";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
@@ -11,8 +12,10 @@ const ACCESS_TOKEN =
 export default function MovieReviews() {
     const { movieId } = useParams();
     const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
+    setLoading(true)
     const fetchMovieReviews = async () => {
         try {
             const response = await axios.get(`/movie/${movieId}/reviews`, {
@@ -23,7 +26,10 @@ export default function MovieReviews() {
             setReviews(response.data.results);
         } catch (error) {
             console.error(error);
-        }
+          }
+          finally {
+            setLoading(false)
+          }
     };
     fetchMovieReviews();
     }, [movieId]);
@@ -33,13 +39,16 @@ export default function MovieReviews() {
     }
 
     return (
-    <ul>
-      {reviews.map(review => (
-        <li key={review.id}>
-          <h4>Author: {review.author}</h4>
-          <p>{review.content}</p>
-        </li>
-      ))}
-    </ul>
+      <div>
+        {loading && <RiseLoader />}
+        <ul>
+          {reviews.map(review => (
+            <li key={review.id}>
+              <h4>Author: {review.author}</h4>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     )
 }
