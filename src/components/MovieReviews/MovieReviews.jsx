@@ -3,11 +3,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { RiseLoader } from "react-spinners";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
-const ACCESS_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMTlmNjE3MzZkNjAwMmZhMzcyNDFkNTZhMDJhN2JhMCIsIm5iZiI6MTc0NzQxNDM1OC4zNiwic3ViIjoiNjgyNzZkNTZhYTBhMmMxNjI0NGI1YzBlIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.5P9P74K3pPRYuTSR8WUC6p_MiEuSnC_52AZzGPOQHHM";
+import {fetchMovieReviews} from "../../services/movies-api.js"
 
 export default function MovieReviews() {
     const { movieId } = useParams();
@@ -15,15 +11,12 @@ export default function MovieReviews() {
     const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
-    const fetchMovieReviews = async () => {
+    async function fetchReviews() {
         try {
-            const response = await axios.get(`/movie/${movieId}/reviews`, {
-                headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-                },
-            });
-            setReviews(response.data.results);
+          setLoading(true);
+          const data = await fetchMovieReviews(movieId)
+
+          setReviews(data.results);
           } catch (error) {
             console.error(error);
           }
@@ -31,8 +24,8 @@ export default function MovieReviews() {
             setLoading(false)
           }
     };
-    fetchMovieReviews();
-    }, [movieId]);
+    fetchReviews();
+    }, [movieId]);            
 
     if (reviews.length === 0) {
         return <p>We don't have any reviews for this movie.</p>;

@@ -8,24 +8,22 @@ export default function HomePage() {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-    
-  async function fetchData() {
-      try {
-          setLoading(true);
-          const data = await fetchTrendingMovies();
-            
-        setMovies(data.results || []);
-        } catch (error) {
-            console.error(error);
-        }
-        finally {
-            setLoading(false)
-        }
-    };
-
-    fetchData();
-    }, []);
+    useEffect(() => {    
+        async function fetchData() {
+            try {
+                setLoading(true);
+                const data = await fetchTrendingMovies();
+                    
+                setMovies(data.results || []);
+                } catch (error) {
+                    console.error(error);
+                }
+                finally {
+                    setLoading(false)
+                }
+        };
+        fetchData();
+        }, []);
 
     return (
         <div>
